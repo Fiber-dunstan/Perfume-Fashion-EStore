@@ -5,6 +5,7 @@
 	"packageManager": "npm@10.9.8",
 	"dependencies": {
 		"@vinext/cloudflare": "latest",
+		"jose": "^6.2.14",
 		"react": "latest",
 		"react-dom": "latest",
 		"react-server-dom-webpack": "latest",

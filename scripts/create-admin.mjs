@@ -1,0 +1,88 @@
+import { createInterface } from "node:readline/promises";
+import { stdin, stdout } from "node:process";
+import { randomBytes, webcrypto } from "node:crypto";
+import { execFileSync } from "node:child_process";
+
+const rl = createInterface({ input: stdin, output: stdout });
+
+function quoteSql(value) {
+  return "'" + value.replace(/'/g, "''") + "'";
+}
+
+function base64url(bytes) {
+  return Buffer.from(bytes).toString("base64url");
+}
+
+async function makePasswordHash(password) {
+  const salt = randomBytes(16);
+  const key = await webcrypto.subtle.importKey(
+    "raw",
+    Buffer.from(password, "utf8"),
+    "PBKDF2",
+    false,
+    ["deriveBits"],
+  );
+
+  const bits = await webcrypto.subtle.deriveBits(
+    {
+      name: "PBKDF2",
+      hash: "SHA-256",
+      salt,
+      iterations: 210000,
+    },
+    key,
+    256,
+  );
+
+  return `pbkdf2$210000$${base64url(salt)}$${base64url(bits)}`;
+}
+
+try {
+  const email = (await rl.question("Administrator email: "))
+    .trim()
+    .toLowerCase();
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+    throw new Error("Enter a valid email address.");
+  }
+
+  const password = await rl.question(
+    "Strong administrator password (input visible): ",
+  );
+
+  if (password.length < 12 || password.length > 1024) {
+    throw new Error("Use a password between 12 and 1024 characters.");
+  }
+
+  const confirm = await rl.question("Confirm password: ");
+  if (password !== confirm) throw new Error("Passwords do not match.");
+
+  const passwordHash = await makePasswordHash(password);
+  const id = randomBytes(16).toString("hex");
+
+  const sql = `
+    INSERT INTO administrators (id, email, password_hash)
+    VALUES (${quoteSql(id)}, ${quoteSql(email)}, ${quoteSql(passwordHash)});
+  `.trim();
+
+  execFileSync(
+    "npx",
+    [
+      "wrangler",
+      "d1",
+      "execute",
+      "perfume-fashion-store-db",
+      process.argv.includes("--local") ? "--local" : "--remote",
+      "--command",
+      sql,
+    ],
+    { stdio: "inherit" },
+  );
+
+  console.log("Administrator created successfully.");
+} catch (error) {
+  console.error(error instanceof Error ? error.message : "Setup failed.");
+  process.exitCode = 1;
+} finally {
+  rl.close();
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "perfume-fashion-store",
+  "main": "vinext/server/fetch-handler",
+  "compatibility_date": "2026-10-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "perfume-fashion-store-db",
+      "database_id": "f1c51d12-350d-474e-988b-8192c3a826c4",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
