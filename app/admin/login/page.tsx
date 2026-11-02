@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
 
   return (
     <main className="admin-shell">
-      <form className="admin-panel" onSubmit={submit}>
+      <form className="admin-panel admin-login-form" onSubmit={submit}>
         <p className="eyebrow">STORE MANAGEMENT</p>
         <h1>Administrator login</h1>
         <p>Sign in to manage products, categories and stock.</p>

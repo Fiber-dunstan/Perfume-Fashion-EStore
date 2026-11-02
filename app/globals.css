@@ -770,3 +770,143 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Admin login spacing */
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 460px;
+  padding: 36px;
+}
+
+.admin-login-form h1 {
+  margin-bottom: 4px;
+}
+
+.admin-login-form > p:not(.eyebrow):not(.admin-error) {
+  margin-top: 0;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.admin-login-form label {
+  margin-top: 4px;
+}
+
+.admin-login-form input:not([type="checkbox"]) {
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.admin-login-form .admin-error {
+  margin: 4px 0;
+}
+
+.admin-login-form button {
+  width: 100%;
+  margin-top: 8px;
+  min-height: 46px;
+}
+
+/* Admin navigation spacing */
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-menu {
+  position: relative;
+}
+
+.admin-header-actions > button {
+  min-height: 44px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .admin-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .admin-login-form {
+    padding: 26px 20px;
+  }
+}
+
+/* Admin login spacing */
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 460px;
+  padding: 36px;
+}
+
+.admin-login-form h1 {
+  margin-bottom: 4px;
+}
+
+.admin-login-form > p:not(.eyebrow):not(.admin-error) {
+  margin-top: 0;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.admin-login-form label {
+  margin-top: 4px;
+}
+
+.admin-login-form input:not([type="checkbox"]) {
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.admin-login-form .admin-error {
+  margin: 4px 0;
+}
+
+.admin-login-form button {
+  width: 100%;
+  margin-top: 8px;
+  min-height: 46px;
+}
+
+/* Admin navigation spacing */
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-menu {
+  position: relative;
+}
+
+.admin-header-actions > button {
+  min-height: 44px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .admin-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .admin-login-form {
+    padding: 26px 20px;
+  }
+}

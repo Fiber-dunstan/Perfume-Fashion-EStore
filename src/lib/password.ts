@@ -1,4 +1,4 @@
-const ITERATIONS = 210_000;
+const ITERATIONS = 100_000;
 
 function toBase64Url(bytes: Uint8Array): string {
   let binary = "";
